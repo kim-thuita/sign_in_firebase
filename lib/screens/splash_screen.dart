@@ -17,34 +17,35 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   _NavigateHome() async {
-    Future.delayed(Duration(milliseconds: 1500));
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => Home_Screen()));
+    Future.delayed(Duration(milliseconds: 4500));
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (_) => Home_Screen()));
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              child: Image(
-                image: AssetImage("images/tracker_image.JPEG"),
-              ),
+    return Scaffold(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Center(
+            child: Image(
+              image: AssetImage("images/tracker_image.JPEG"),
             ),
-            SizedBox(height: 10),
-            Text(
-              "Simply Living",
-              style: GoogleFonts.alata(
-                color: Colors.green.shade400,
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-              ),
+          ),
+          SizedBox(height: 10),
+          Text(
+            "Simply Living",
+            style: GoogleFonts.alata(
+              color: Colors.green.shade400,
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
