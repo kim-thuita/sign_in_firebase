@@ -1,4 +1,5 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:basic_sign_implementation/screens/sign_in.dart';
+import 'package:basic_sign_implementation/screens/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -27,39 +28,59 @@ class _Home_ScreenState extends State<Home_Screen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Reusable_Buttons(text: "Sign Up"),
-            SizedBox(height: 15),
-            Reusable_Buttons(text: 'Sign In ')
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class Reusable_Buttons extends StatelessWidget {
-  final String text;
-
-  Reusable_Buttons({super.key, required this.text});
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-      child: GestureDetector(
-        child: Container(
-          height: 45,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: Colors.purple,
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Text(
-            text,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 20,
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+              child: GestureDetector(
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => Sign_Up(),
+                  ),
+                ),
+                child: Container(
+                  height: 45,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: Colors.purple,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    "Sign Up",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ),
             ),
-          ),
+            SizedBox(height: 15),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+              child: GestureDetector(
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => Sign_In(),
+                  ),
+                ),
+                child: Container(
+                  height: 45,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: Colors.purple,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    "Sign In",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 20),
+          ],
         ),
       ),
     );
