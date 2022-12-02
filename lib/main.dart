@@ -1,7 +1,7 @@
 import 'package:basic_sign_implementation/screens/home_screen.dart';
 import 'package:basic_sign_implementation/screens/sign_in.dart';
 import 'package:basic_sign_implementation/screens/sign_up.dart';
-import 'package:basic_sign_implementation/screens/splash_screen.dart';
+import 'package:basic_sign_implementation/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {

@@ -17,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   _NavigateHome() async {
-    Future.delayed(Duration(milliseconds: 4500));
+    Future.delayed(const Duration(milliseconds: 5500));
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (_) => Home_Screen()));
@@ -33,16 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
         children: [
           Center(
             child: Image(
-              image: AssetImage("images/tracker_image.JPEG"),
-            ),
-          ),
-          SizedBox(height: 10),
-          Text(
-            "Simply Living",
-            style: GoogleFonts.alata(
-              color: Colors.green.shade400,
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
+              image: AssetImage("images/reading_img.png"),
             ),
           ),
         ],
