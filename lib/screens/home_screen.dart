@@ -39,22 +39,26 @@ class _Home_ScreenState extends State<Home_Screen> {
               ),
             ),
             SizedBox(height: 40),
-            Container(
-              alignment: Alignment.center,
-              height: 55,
-              width: 350,
-              decoration: BoxDecoration(
-                color: Colors.orange,
-                border: Border.all(
-                  color: Colors.amberAccent,
+            GestureDetector(
+              onTap: () => Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Sign_Up())),
+              child: Container(
+                alignment: Alignment.center,
+                height: 55,
+                width: 350,
+                decoration: BoxDecoration(
+                  color: Colors.orange,
+                  border: Border.all(
+                    color: Colors.amberAccent,
+                  ),
+                  borderRadius: BorderRadius.circular(16),
                 ),
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Text(
-                "Create Account",
-                style: GoogleFonts.aldrich(
-                  color: Colors.white,
-                  fontSize: 20,
+                child: Text(
+                  "Create Account",
+                  style: GoogleFonts.aldrich(
+                    color: Colors.white,
+                    fontSize: 20,
+                  ),
                 ),
               ),
             ),

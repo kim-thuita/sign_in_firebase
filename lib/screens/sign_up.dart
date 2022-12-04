@@ -1,4 +1,6 @@
+import 'package:basic_sign_implementation/screens/home_screen.dart';
 import 'package:basic_sign_implementation/screens/sign_in.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -112,27 +114,29 @@ class _Sign_UpState extends State<Sign_Up> {
                 TextFields(
                     icon: Icon(Icons.security), text: 'Pick A Strong Password'),
                 SizedBox(height: 10),
-                Container(
-                  alignment: Alignment.center,
-                  height: 60,
-                  width: 350,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                      colors: [Colors.purpleAccent, Colors.deepPurpleAccent],
+                GestureDetector(
+                  child: Container(
+                    alignment: Alignment.center,
+                    height: 60,
+                    width: 350,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                        colors: [Colors.purpleAccent, Colors.deepPurpleAccent],
+                      ),
+                      borderRadius: BorderRadius.circular(18),
+                      border: Border.all(
+                        color: Colors.deepPurple,
+                      ),
                     ),
-                    borderRadius: BorderRadius.circular(18),
-                    border: Border.all(
-                      color: Colors.deepPurple,
-                    ),
-                  ),
-                  child: Text(
-                    "Create Account",
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.aldrich(
-                      color: Colors.white,
-                      fontSize: 20,
+                    child: Text(
+                      "Create Account",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.aldrich(
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
                     ),
                   ),
                 ),

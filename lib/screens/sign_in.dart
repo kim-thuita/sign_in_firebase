@@ -1,16 +1,38 @@
+import 'package:basic_sign_implementation/screens/home_page_screen.dart';
 import 'package:basic_sign_implementation/screens/sign_up.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Sign_In extends StatefulWidget {
-  const Sign_In({Key? key}) : super(key: key);
-
   @override
   State<Sign_In> createState() => _Sign_InState();
 }
 
 class _Sign_InState extends State<Sign_In> {
+  final _formkey = GlobalKey<FormState>();
+  final _auth = FirebaseAuth.instance;
+  final TextEditingController _textEditingemail = TextEditingController();
+  final TextEditingController _textEditingpassword = TextEditingController();
+
+  Future<void> Log_In(String email, String password) async {
+    if (_formkey.currentState!.validate()) {
+      await _auth
+          .signInWithEmailAndPassword(email: email, password: password)
+          .then((uid) => {
+                Fluttertoast.showToast(msg: "Login Was Successfull"),
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: (context) => HomePage_Screen(),
+                )),
+              })
+          .catchError((e) {
+        print(e);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -99,37 +121,101 @@ class _Sign_InState extends State<Sign_In> {
                 SizedBox(
                   height: 10,
                 ),
-                TextFields(
-                  icon: Icon(Icons.mark_email_read_rounded),
-                  text: 'Enter Your Email',
+                Padding(
+                  padding: EdgeInsets.all(20),
+                  child: TextFormField(
+                    controller: _textEditingemail,
+                    autofocus: false,
+                    textAlign: TextAlign.start,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return ("Please Enter Your password");
+                      }
+                      if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                          .hasMatch(value)) {
+                        return ("Enter a Valid Email");
+                      }
+                      return null;
+                    },
+                    onSaved: (value) {
+                      _textEditingemail.text = value!;
+                    },
+                    textInputAction: TextInputAction.next,
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.mark_email_read_outlined),
+                      hintStyle: TextStyle(
+                        color: Colors.grey,
+                      ),
+                      hintText: 'Enter Your Email',
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey.shade600),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                  ),
                 ),
                 SizedBox(
                   height: 10,
                 ),
-                TextFields(
-                    icon: Icon(Icons.security), text: 'Pick A Strong Password'),
-                SizedBox(height: 10),
-                Container(
-                  alignment: Alignment.center,
-                  height: 60,
-                  width: 350,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                      colors: [Colors.purpleAccent, Colors.deepPurpleAccent],
-                    ),
-                    borderRadius: BorderRadius.circular(18),
-                    border: Border.all(
-                      color: Colors.deepPurple,
+                Padding(
+                  padding: EdgeInsets.all(20),
+                  child: TextFormField(
+                    controller: _textEditingpassword,
+                    obscureText: true,
+                    autofocus: false,
+                    textAlign: TextAlign.start,
+                    validator: (value) {
+                      RegExp regExp = RegExp("R'^.{6,}%");
+                      if (value!.isEmpty) {
+                        return ("Password is required");
+                      }
+                      if (!regExp.hasMatch(value)) {
+                        return ("PLease Enter a valid Password(Min. 6 character");
+                      }
+                    },
+                    onSaved: (value) {
+                      _textEditingpassword.text = value!;
+                    },
+                    textInputAction: TextInputAction.done,
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.key_outlined),
+                      hintStyle: TextStyle(
+                        color: Colors.grey,
+                      ),
+                      hintText: 'Enter your passsword',
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey.shade600),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                     ),
                   ),
-                  child: Text(
-                    "Log in",
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.aldrich(
-                      color: Colors.white,
-                      fontSize: 20,
+                ),
+                SizedBox(height: 10),
+                GestureDetector(
+                  onTap: () =>
+                      Log_In(_textEditingemail.text, _textEditingpassword.text),
+                  child: Container(
+                    alignment: Alignment.center,
+                    height: 60,
+                    width: 350,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                        colors: [Colors.purpleAccent, Colors.deepPurpleAccent],
+                      ),
+                      borderRadius: BorderRadius.circular(18),
+                      border: Border.all(
+                        color: Colors.deepPurple,
+                      ),
+                    ),
+                    child: Text(
+                      "Log in",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.aldrich(
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
                     ),
                   ),
                 ),
@@ -162,34 +248,6 @@ class _Sign_InState extends State<Sign_In> {
               ],
             )
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class TextFields extends StatelessWidget {
-  final String text;
-  final Widget? icon;
-
-  const TextFields({super.key, required this.text, this.icon});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(20),
-      child: TextField(
-        textAlign: TextAlign.start,
-        decoration: InputDecoration(
-          prefixIcon: icon,
-          hintStyle: TextStyle(
-            color: Colors.grey,
-          ),
-          hintText: text,
-          border: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey.shade600),
-            borderRadius: BorderRadius.circular(20),
-          ),
         ),
       ),
     );
