@@ -1,17 +1,33 @@
 import 'package:basic_sign_implementation/screens/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Home_Screen extends StatefulWidget {
+  final Function(User) OnSignIn;
+
+  const Home_Screen({super.key, required this.OnSignIn});
+
   @override
   State<Home_Screen> createState() => _Home_ScreenState();
 }
 
 class _Home_ScreenState extends State<Home_Screen> {
+  User? user;
+  Future<void> _SignInAnonimously() async {
+    try {
+      final usercredentials = await FirebaseAuth.instance.signInAnonymously();
+      widget.OnSignIn(usercredentials.user!);
+      print("UserId:${usercredentials.user?.uid}");
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData.fallback(),
+      theme: ThemeData.dark(),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         extendBodyBehindAppBar: true,
@@ -71,7 +87,7 @@ class _Home_ScreenState extends State<Home_Screen> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
                     )),
-                onPressed: () {},
+                onPressed: _SignInAnonimously,
                 child: Text(
                   "Sign IN Anonymously",
                   style: GoogleFonts.aldrich(
