@@ -1,6 +1,3 @@
-import 'package:basic_sign_implementation/screens/home_screen.dart';
-import 'package:basic_sign_implementation/screens/sign_in.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -141,25 +138,6 @@ class _Sign_UpState extends State<Sign_Up> {
                   ),
                 ),
                 SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Already Have an Account ?",
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    GestureDetector(
-                      child: Text(
-                        "Log In",
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
-                      ),
-                    )
-                  ],
-                ),
               ],
             )
           ],

@@ -1,4 +1,3 @@
-import 'package:basic_sign_implementation/screens/sign_in.dart';
 import 'package:basic_sign_implementation/screens/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -62,35 +61,25 @@ class _Home_ScreenState extends State<Home_Screen> {
                 ),
               ),
             ),
-            SizedBox(height: 40),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Already Have an Account ?",
+            SizedBox(height: 60),
+            Container(
+              height: 55,
+              width: 350,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.orange,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    )),
+                onPressed: () {},
+                child: Text(
+                  "Sign IN Anonymously",
                   style: GoogleFonts.aldrich(
-                    color: Colors.grey.shade600,
+                    color: Colors.white,
                     fontSize: 15,
                   ),
                 ),
-                SizedBox(width: 15),
-                GestureDetector(
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Sign_In(),
-                    ),
-                  ),
-                  child: Text(
-                    "Log In",
-                    style: GoogleFonts.aldrich(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
           ],
         ),
