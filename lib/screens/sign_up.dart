@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -11,6 +10,9 @@ class Sign_Up extends StatefulWidget {
 }
 
 class _Sign_UpState extends State<Sign_Up> {
+  final _Emailcontroller = TextEditingController();
+  final _passwordcontroller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -96,13 +98,11 @@ class _Sign_UpState extends State<Sign_Up> {
             ),
             Column(
               children: [
-                TextFields(
-                  text: 'Enter Your Name',
-                ),
                 SizedBox(
                   height: 10,
                 ),
                 TextFields(
+                  textedit: _Emailcontroller,
                   icon: Icon(Icons.mark_email_read_rounded),
                   text: 'Enter Your Email',
                 ),
@@ -110,7 +110,9 @@ class _Sign_UpState extends State<Sign_Up> {
                   height: 10,
                 ),
                 TextFields(
-                    icon: Icon(Icons.security), text: 'Pick A Strong Password'),
+                    textedit: _passwordcontroller,
+                    icon: Icon(Icons.security),
+                    text: 'Pick A Strong Password'),
                 SizedBox(height: 10),
                 GestureDetector(
                   child: Container(
@@ -151,14 +153,17 @@ class _Sign_UpState extends State<Sign_Up> {
 class TextFields extends StatelessWidget {
   final String text;
   final Widget? icon;
+  final TextEditingController textedit;
 
-  const TextFields({super.key, required this.text, this.icon});
+  const TextFields(
+      {super.key, required this.text, this.icon, required this.textedit});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(20),
       child: TextField(
+        controller: textedit,
         textAlign: TextAlign.start,
         decoration: InputDecoration(
           prefixIcon: icon,
