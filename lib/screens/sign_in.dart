@@ -1,18 +1,19 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class Sign_Up extends StatefulWidget {
-  final VoidCallback showloginpage;
+class Sign_In extends StatefulWidget {
+  final VoidCallback showregisterpage;
 
-  const Sign_Up({super.key, required this.showloginpage});
+  const Sign_In({super.key, required this.showregisterpage});
 
   @override
-  State<Sign_Up> createState() => _Sign_UpState();
+  State<Sign_In> createState() => _Sign_InState();
 }
 
-class _Sign_UpState extends State<Sign_Up> {
+class _Sign_InState extends State<Sign_In> {
   final _Emailcontroller = TextEditingController();
   final _passwordcontroller = TextEditingController();
 
@@ -23,14 +24,14 @@ class _Sign_UpState extends State<Sign_Up> {
     super.dispose();
   }
 
-  Future CreateUser() async {
-    await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _Emailcontroller.text.trim(),
-        password: _passwordcontroller.text.trim());
-  }
-
   @override
   Widget build(BuildContext context) {
+    Future _SignIn() async {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _Emailcontroller.text.trim(),
+          password: _passwordcontroller.text.trim());
+    }
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
@@ -51,7 +52,7 @@ class _Sign_UpState extends State<Sign_Up> {
                 ),
               ),
               Text(
-                "Sign Up",
+                "Sign In",
                 style: GoogleFonts.aladin(color: Colors.white, fontSize: 35),
               ),
             ],
@@ -130,42 +131,31 @@ class _Sign_UpState extends State<Sign_Up> {
                     icon: Icon(Icons.security),
                     text: 'Pick A Strong Password'),
                 SizedBox(height: 10),
-                GestureDetector(
-                  child: Container(
-                      alignment: Alignment.center,
-                      height: 60,
-                      width: 350,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                          colors: [
-                            Colors.purpleAccent,
-                            Colors.deepPurpleAccent
-                          ],
-                        ),
-                        borderRadius: BorderRadius.circular(18),
-                        border: Border.all(
-                          color: Colors.deepPurple,
+                ElevatedButton(
+                  onPressed: _SignIn,
+                  child: Text("Log Into Account"),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Row(
+                  children: [
+                    Text("DO Not Have An Account ?"),
+                    SizedBox(
+                      width: 15,
+                    ),
+                    GestureDetector(
+                      onTap: widget.showregisterpage,
+                      child: Text(
+                        "Sign Up",
+                        style: GoogleFonts.sourceSansPro(
+                          color: Colors.grey,
+                          fontSize: 20,
                         ),
                       ),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          primary: Colors.transparent,
-                          elevation: 0,
-                        ),
-                        onPressed: CreateUser,
-                        child: Text(
-                          "Create Account",
-                          style: GoogleFonts.sourceSansPro(
-                              color: Colors.grey, fontSize: 20),
-                        ),
-                      )),
-                ),
-                SizedBox(height: 20),
+                    )
+                  ],
+                )
               ],
             )
           ],
