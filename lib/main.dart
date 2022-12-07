@@ -1,4 +1,4 @@
-import 'package:basic_sign_implementation/screens/stream_builder.dart';
+import 'package:basic_sign_implementation/screens/auth/stream_builder.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 

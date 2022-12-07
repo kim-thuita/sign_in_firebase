@@ -1,9 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Sign_Up extends StatefulWidget {
-  const Sign_Up({Key? key}) : super(key: key);
+  final VoidCallback showloginpage;
+
+  const Sign_Up({super.key, required this.showloginpage});
 
   @override
   State<Sign_Up> createState() => _Sign_UpState();
@@ -12,6 +15,19 @@ class Sign_Up extends StatefulWidget {
 class _Sign_UpState extends State<Sign_Up> {
   final _Emailcontroller = TextEditingController();
   final _passwordcontroller = TextEditingController();
+
+  @override
+  void dispose() {
+    _Emailcontroller.dispose();
+    _passwordcontroller.dispose();
+    super.dispose();
+  }
+
+  Future CreateUser() async {
+    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _Emailcontroller.text.trim(),
+        password: _passwordcontroller.text.trim());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -116,29 +132,38 @@ class _Sign_UpState extends State<Sign_Up> {
                 SizedBox(height: 10),
                 GestureDetector(
                   child: Container(
-                    alignment: Alignment.center,
-                    height: 60,
-                    width: 350,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
-                        colors: [Colors.purpleAccent, Colors.deepPurpleAccent],
+                      alignment: Alignment.center,
+                      height: 60,
+                      width: 350,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                          colors: [
+                            Colors.purpleAccent,
+                            Colors.deepPurpleAccent
+                          ],
+                        ),
+                        borderRadius: BorderRadius.circular(18),
+                        border: Border.all(
+                          color: Colors.deepPurple,
+                        ),
                       ),
-                      borderRadius: BorderRadius.circular(18),
-                      border: Border.all(
-                        color: Colors.deepPurple,
-                      ),
-                    ),
-                    child: Text(
-                      "Create Account",
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.aldrich(
-                        color: Colors.white,
-                        fontSize: 20,
-                      ),
-                    ),
-                  ),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          primary: Colors.transparent,
+                          elevation: 0,
+                        ),
+                        onPressed: CreateUser,
+                        child: Text(
+                          "Create Account",
+                          style: GoogleFonts.sourceSansPro(
+                              color: Colors.grey, fontSize: 20),
+                        ),
+                      )),
                 ),
                 SizedBox(height: 20),
               ],
