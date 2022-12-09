@@ -1,8 +1,8 @@
-import 'package:basic_sign_implementation/screens/auth/auth_page.dart';
 import 'package:basic_sign_implementation/screens/home_page.dart';
-import 'package:basic_sign_implementation/screens/sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import 'auth_page.dart';
 
 class Main_Page_Dart extends StatefulWidget {
   @override
