@@ -131,14 +131,38 @@ class _Sign_InState extends State<Sign_In> {
                     icon: Icon(Icons.security),
                     text: 'Pick A Strong Password'),
                 SizedBox(height: 10),
-                ElevatedButton(
-                  onPressed: _SignIn,
-                  child: Text("Log Into Account"),
+                Container(
+                  width: 325,
+                  height: 55,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.deepPurple,
+                        Colors.red,
+                      ],
+                    ),
+                  ),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.transparent,
+                      elevation: 0,
+                    ),
+                    onPressed: _SignIn,
+                    child: Text(
+                      textAlign: TextAlign.center,
+                      "Log In",
+                      style: GoogleFonts.sourceSansPro(
+                          color: Colors.white, fontSize: 20),
+                    ),
+                  ),
                 ),
                 SizedBox(
                   height: 30,
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text("DO Not Have An Account ?"),
                     SizedBox(
@@ -153,11 +177,11 @@ class _Sign_InState extends State<Sign_In> {
                           fontSize: 20,
                         ),
                       ),
-                    )
+                    ),
                   ],
-                )
+                ),
               ],
-            )
+            ),
           ],
         ),
       ),

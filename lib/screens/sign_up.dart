@@ -131,39 +131,38 @@ class _Sign_UpState extends State<Sign_Up> {
                     text: 'Pick A Strong Password'),
                 SizedBox(height: 10),
                 GestureDetector(
+                  onTap: widget.showloginpage,
                   child: Container(
-                      alignment: Alignment.center,
-                      height: 60,
-                      width: 350,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                          colors: [
-                            Colors.purpleAccent,
-                            Colors.deepPurpleAccent
-                          ],
-                        ),
-                        borderRadius: BorderRadius.circular(18),
-                        border: Border.all(
-                          color: Colors.deepPurple,
-                        ),
+                    alignment: Alignment.center,
+                    height: 60,
+                    width: 350,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                        colors: [Colors.purpleAccent, Colors.deepPurpleAccent],
                       ),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          primary: Colors.transparent,
-                          elevation: 0,
+                      borderRadius: BorderRadius.circular(18),
+                      border: Border.all(
+                        color: Colors.deepPurple,
+                      ),
+                    ),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
                         ),
-                        onPressed: CreateUser,
-                        child: Text(
-                          "Create Account",
-                          style: GoogleFonts.sourceSansPro(
-                              color: Colors.grey, fontSize: 20),
-                        ),
-                      )),
+                        primary: Colors.transparent,
+                        elevation: 0,
+                      ),
+                      onPressed: CreateUser,
+                      child: Text(
+                        "Create Account",
+                        style: GoogleFonts.sourceSansPro(
+                            color: Colors.grey, fontSize: 20),
+                      ),
+                    ),
+                  ),
                 ),
                 SizedBox(height: 20),
               ],

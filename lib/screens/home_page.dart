@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Home_Page_Screen extends StatefulWidget {
   const Home_Page_Screen({Key? key}) : super(key: key);
@@ -18,23 +20,26 @@ class _Home_Page_ScreenState extends State<Home_Page_Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(Icons.arrow_circle_left_rounded)),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(
+          Icons.add,
+          size: 30,
+          color: Colors.amberAccent,
+        ),
+        backgroundColor: Colors.black,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      body: Column(),
+      bottomNavigationBar: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Center(
-            child: Text(
-              "Signed iN As :${user.email}",
-            ),
+          IconButton(
+            onPressed: () {},
+            icon: FaIcon(FontAwesomeIcons.home),
           ),
-          ElevatedButton(onPressed: _SignOut, child: Text("Sign Out"))
+          IconButton(onPressed: () {}, icon: FaIcon(FontAwesomeIcons.user))
         ],
       ),
     );
